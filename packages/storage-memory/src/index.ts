@@ -10,7 +10,11 @@ export class MemoryStorage implements IStorage {
     }
 
     public async setItem(key: string, content: any): Promise<void> {
-        this.memCache[key] = content
+        if (content === undefined) {
+            delete this.memCache[key];
+        } else {
+            this.memCache[key] = content
+        }
     }
 
     public async clear(): Promise<void> {
